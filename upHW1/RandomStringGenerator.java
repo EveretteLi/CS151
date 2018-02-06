@@ -49,15 +49,15 @@ public class RandomStringGenerator {
 	*	@return ranStr random string in length len
 	*/
 	public String nextString(int len) {
-		String ranStr = "";
+		StringBuffer ranStr = new StringBuffer("");
 		Random ran = new Random();
 		if(!letterPool.isEmpty()){
 			for(int i = 0; i < len; i++){
-				ranStr += letterPool.get(ran.nextInt(letterPool.size()));
+				ranStr.append(letterPool.get(ran.nextInt(letterPool.size())));
 			}
 		}
 		
-		return ranStr;
+		return ranStr.toString();
 	}
 
 	/**
