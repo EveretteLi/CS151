@@ -8,32 +8,65 @@ import java.io.File;
 *	then returns the min, max and average of the value
 */
 public class DataAnalyzer {
-	public static void sop(Object x){ System.out.println(x); }
-	//main
-	public static void main(String[] args){
+	private float min, max, avg;
+
+	/**
+	*	no arg constructor for the class
+	*	calls dataProcessing() directly
+	*	@throws FileNotFoundException if the data file not found
+	*/
+	public DataAnalyzer() throws FileNotFoundException {
+		this.dataProcessing(); 
+	}
+
+	/**
+	*	return the minimum number from the data file in float
+	*	@return min the minimun from the data
+	*/
+	public float getMinimum() { return min; }
+	/**
+	*	return the maximum number from the data file in float
+	*	@return max the maximun from the data
+	*/
+	public float getMaximum() { return max; }
+	/**
+	*	return the average of the data file in float
+	*	@return avg the average of the data
+	*/
+	public float getAverage() { return avg; }
+
+	/**
+	*	ask user for data file
+	*	reads the data then initialized the min, max and avg
+	*	@throws FileNotFoundException if the data file was not found
+	*/
+	public void dataProcessing() throws FileNotFoundException {
 		ArrayList<Float> dataList = new ArrayList<>();
+		
 		//get the file name from the user
 		Scanner fileName = new Scanner(System.in);
 		//try to find the data file
 		Scanner fileInput = null;
-		do{
-			sop("Please enter the name of data file: ");
-			try{
-				fileInput = new Scanner(new File(fileName.nextLine()));
-			} catch(FileNotFoundException e) {
-				sop("ERROR: file not found");
-			}
-		} while(fileInput == null);
+		System.out.println("Please enter the name of data file: ");
+		File dataFile = new File(fileName.next());
+		//file not found -> throw an exception
+		if(dataFile == null){
+			fileName.close();
+			fileInput.close();
+			throw new FileNotFoundException("ERROE: File not found!");
+		}
+		fileInput = new Scanner(dataFile);
 		fileName.close();
+
 		//read the file
 		while(fileInput.hasNextFloat()) {
 			dataList.add(fileInput.nextFloat());
 		}
 		fileInput.close();
 
-		float min = dataList.get(0);
-		float max = dataList.get(0);			
-		float avg = 0;
+		this.min = dataList.get(0);
+		this.max = dataList.get(0);			
+		this.avg = 0;
 		//find min, max and average
 		for(float each : dataList){
 			if(each < min)					
@@ -43,9 +76,5 @@ public class DataAnalyzer {
 			avg += each;
 		}
 		avg = avg / dataList.size();
-
-		sop("Minimun: " + min);
-		sop("Maximun: " + max);
-		sop("Average: " + avg);
 	}
 }

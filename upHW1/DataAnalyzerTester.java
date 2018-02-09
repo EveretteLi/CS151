@@ -29,5 +29,20 @@ public class DataAnalyzerTester {
     public static void main(String[] args){
         DataAnalyzerTester t = new DataAnalyzerTester();
         t.dataFileWriter();
+
+        //testing DataAnalyzer
+        DataAnalyzer da = null;
+        try{
+            da = new DataAnalyzer();
+        } catch(FileNotFoundException e){
+            System.err.println(e.getMessage());
+        }
+        if(da != null){
+            sop("Min:   " + da.getMinimum());
+            sop("Max:   " + da.getMaximum());
+            sop("Avg:   " + da.getAverage());
+        }
     }
+
+    public static void sop(Object x) { System.out.println(x); }
 }
