@@ -5,7 +5,7 @@ public interface NumberSequence {
 
     default boolean hasNext(){ return true; }
 
-    default NumberSequence of(long...args) throws UnsupportedOperationException {
+    static NumberSequence of(long...args) throws UnsupportedOperationException {
         throw new UnsupportedOperationException("This operation has not been supported.");
     }
 

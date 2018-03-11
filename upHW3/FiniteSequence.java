@@ -3,6 +3,7 @@ public class FiniteSequence implements NumberSequence {
     int numPointer;
 
     public FiniteSequence() { finiteSequence = new long[]{}; numPointer = -1; }
+    public FiniteSequence(long...args) {finiteSequence  = args; numPointer = -1; }
 
     /**
      * return the long in the sequence pointed by the numPointer
@@ -31,10 +32,9 @@ public class FiniteSequence implements NumberSequence {
      * @param args the element in the new sequence
      * @return this finite sequence
      */
-    public FiniteSequence of(long...args) {
-        finiteSequence = args;
-        numPointer = -1;
-        return this;
+    public static FiniteSequence of(long...args) {
+        FiniteSequence finit = new FiniteSequence(args);
+        return finit;
     }
 
     /**
